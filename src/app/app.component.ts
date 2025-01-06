@@ -9,4 +9,6 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'corner_store';
+
+  currentComponent: string = ""
 }
