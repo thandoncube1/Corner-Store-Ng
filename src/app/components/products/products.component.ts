@@ -3,6 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/product.service';
+import { IProduct } from '../../model/interface/product';
 
 @Component({
   selector: 'app-products',
@@ -12,6 +13,7 @@ import { ProductService } from '../../services/product.service';
 })
 export class ProductsComponent implements OnInit {
 
+  productList: IProduct[] = [];
   api_url: string = environment.CORS_URL + environment.API_URL;
   loading: boolean = true;
   // Services
@@ -20,11 +22,15 @@ export class ProductsComponent implements OnInit {
   // Life cycle method for the NG
   ngOnInit(): void {
     this.getAllProducts();
-    console.log(environment.API_URL + "GetAllProducts");
   }
 
   getAllProducts() {
-    this.productService.getProducts(this.api_url, this.loading);
+    this.productService.getProducts(this.api_url, this.productList, this.loading).then((data) => {
+      this.productList = data;
+      this.loading = false;
+    }).catch((err) => {
+      console.log(err);
+    });
+    this.loading = false;
   }
-
 }
