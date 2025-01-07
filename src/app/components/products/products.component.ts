@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { IProduct } from '../../model/interface/product';
 import { CommonModule } from '@angular/common';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -12,9 +12,10 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductsComponent implements OnInit {
 
-  http = inject(HttpClient);
-  productList: IProduct[] = [];
   api_url: string = environment.CORS_URL + environment.API_URL;
+  loading: boolean = true;
+  // Services
+  productService = new ProductService();
 
   // Life cycle method for the NG
   ngOnInit(): void {
@@ -23,15 +24,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getAllProducts() {
-    this.http.get(this.api_url + "GetAllProducts").subscribe({
-      next: async (res: any) => {
-       this.productList = await res.data;
-       console.log("Products:", this.productList);
-      },
-      error: (error: string) => {
-        console.error("Error fetching the product list:", error);
-      }
-    });
+    this.productService.getProducts(this.api_url, this.loading);
   }
 
 }
