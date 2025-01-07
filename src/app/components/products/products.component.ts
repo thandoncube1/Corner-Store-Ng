@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/product.service';
@@ -33,4 +32,6 @@ export class ProductsComponent implements OnInit {
     });
     this.loading = false;
   }
+
+  // Get Product By Id
 }
