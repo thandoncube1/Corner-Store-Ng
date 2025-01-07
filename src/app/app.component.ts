@@ -9,6 +9,5 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'corner_store';
-
-  currentComponent: string = ""
+  currentYear: number = new Date().getFullYear();
 }

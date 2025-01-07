@@ -3,20 +3,22 @@ import { environment } from '../../../environments/environment';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/product.service';
 import { IProduct } from '../../model/interface/product';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit {
 
+  // Constructor
+  constructor(private router: Router, private productService: ProductService) {}
+
   productList: IProduct[] = [];
   api_url: string = environment.CORS_URL + environment.API_URL;
   loading: boolean = true;
-  // Services
-  productService = new ProductService();
 
   // Life cycle method for the NG
   ngOnInit(): void {
@@ -24,7 +26,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getAllProducts() {
-    this.productService.getProducts(this.api_url, this.productList, this.loading).then((data) => {
+    this.productService.getProducts(this.api_url, this.productList).then((data) => {
       this.productList = data;
       this.loading = false;
     }).catch((err) => {
@@ -34,4 +36,9 @@ export class ProductsComponent implements OnInit {
   }
 
   // Get Product By Id
+  navigateToProduct(product: IProduct) {
+    console.log("Product: ", product);
+    //Programmatic navigation with the query
+    this.router.navigate(['/products', product.productId]);
+  }
 }

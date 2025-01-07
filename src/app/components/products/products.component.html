@@ -19,8 +19,10 @@
             ${{ product.productPrice }}
           </h2>
           <h3 class="text-sm text-gray-700 h-5 mb-10">
-            <a href="#" class="font-thin font-sans text-xl">
-              <span aria-hidden="true" class="absolute inset-0"></span>
+            <a
+              [routerLink]="['/products', product.productId]"
+              class="font-thin font-sans text-xl"
+            >
               {{ product.productName }}
             </a>
           </h3>
@@ -28,7 +30,8 @@
           <div class="flex justify-center border-t mt-2">
             <button
               type="button"
-              class="text-blue-700 bg-white outline-blue-700 justify-end hover:bg-blue-800 mt-1 focus:ring-4 focus:outline-blue-700 focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center inline-flex items-center me-2 dark:bg-white dark:hover:bg-white dark:focus:ring-blue-800"
+              class="text-blue-700 bg-white justify-end mt-1 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center inline-flex items-center me-2 dark:bg-white dark:hover:bg-white"
+              (click)="navigateToProduct(product)"
             >
               <svg
                 class="w-3.5 h-3.5 me-2"
@@ -48,10 +51,9 @@
       </div>
     </div>
   </div>
-  <div
-    *ngIf="loading && productList.length == 0"
-    class="flex justify-center h-screen items-center"
-  >
+
+ <!-- Loading Card -->
+  <div *ngIf="loading || productList.length == 0;" class="flex justify-center h-screen items-center">
     <div
       role="status"
       class="max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-400"

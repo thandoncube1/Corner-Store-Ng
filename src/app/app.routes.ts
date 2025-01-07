@@ -13,14 +13,9 @@ export const routes: Routes = [
     {
         path: 'products',
         component: ProductsComponent,
-        children: [
-            {
-                path: ':id',
-                component: ProductDetailComponent,
-                resolve: {
-                    product: ProductResolverService
-                }
-            }
-        ]
+    },
+    {
+        path: 'products/:id',
+        component: ProductDetailComponent
     }
 ];
