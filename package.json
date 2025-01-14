@@ -1,9 +1,12 @@
 {
   "name": "corner-store",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
-    "start": "node -e \"require('child_process').spawn(process.platform === 'win32' ? 'start-server.bat' : './start-server.sh', [], {shell: true, stdio: 'inherit'})\"",
+    "start": "ng serve",
+    "develop": "node --eval \"require('child_process').spawn(process.platform === 'win32' ? 'start-server.bat' : './start-server.sh', [], {shell: true, stdio: 'inherit'})\"",
+    "development": "node index.js --watch",
     "build": "ng build --configuration=production",
     "serve:deno": "deno run --allow-net --allow-read server/main.ts",
     "watch": "ng build --watch --configuration development",
@@ -19,6 +22,7 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
+    "net": "^1.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

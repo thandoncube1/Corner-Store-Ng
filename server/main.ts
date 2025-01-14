@@ -29,6 +29,7 @@ async function handler(req: Request): Promise<Response> {
       const data = await response.json();
 
       return new Response(JSON.stringify(data), {
+        status: 200,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -47,8 +48,18 @@ async function handler(req: Request): Promise<Response> {
   }
 
   // Serve product by ID from Angular fetch
-  if (filepath.match(/^\api\/v1\/GetProductById\/\d+$/)) {
-    const productId = filepath.split('/').pop();
+  if (filepath === '/api/v1/GetProductById') {
+    const productId = url.searchParams.get('id');
+    if (!productId) {
+      return new Response(JSON.stringify({
+          error:'Product Id is required'
+      }), {
+          status: 400,
+          headers: {
+              "Content-Type": "application/json"
+          }
+      })
+    }
     try {
       const response = await fetch(
         `https://freeapi.miniprojectideas.com/api/amazon/GetProductById?id=${productId}`,
@@ -66,8 +77,10 @@ async function handler(req: Request): Promise<Response> {
       }
 
       const data = await response.json();
-      console.log(data);
+      // Logging purposes
+      console.log("Product ID:", data.data.productId);
       return new Response(JSON.stringify(data), {
+        status: 201,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -138,4 +151,17 @@ function getContentType(filepath: string): string {
 // Start server
 const port = 4200;
 console.log(`Server running on http://localhost:${port}`);
-await serve(handler, { port });
+try {
+  Deno.listen({ port });
+  console.log(`Server listening on http://localhost:${port}`);
+} catch (err) {
+  if (err instanceof Deno.errors.AddrInUse) {
+    console.error(`Port ${port} is already in use`);
+    Deno.exit(1);
+  } else {
+    console.error(`Error starting server: ${err}`);
+    Deno.exit(1);
+  }
+} finally {
+  await serve(handler, { port });
+}
