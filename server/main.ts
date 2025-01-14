@@ -8,6 +8,41 @@ async function handler(req: Request): Promise<Response> {
   const url = new URL(req.url);
   let filepath = url.pathname;
 
+  // Serve a get route to fetch Product Data
+  if (filepath === '/api/v1/products') {
+    try {
+      const response = await fetch('https://freeapi.miniprojectideas.com/api/amazon/GetAllProducts', {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            // Forward any authorization headers you may need
+            ...req.headers
+          },
+          // Forward the request body
+          body: req.body
+      });
+
+      // The data response from products
+      const data = await response.json();
+
+      console.log(data);
+
+      return new Response(JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+    } catch (error) {
+      return new Response(JSON.stringify({ error: 'Failed to fetch product results\n' + error }), {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json"
+          }
+      });
+    }
+  }
+
+
   // Serve static files from Angular dist
   if (filepath === '/') {
     filepath = '/index.html';
