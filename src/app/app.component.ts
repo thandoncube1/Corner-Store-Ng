@@ -8,6 +8,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'corner_store';
+  title = 'Corner Store';
   currentYear: number = new Date().getFullYear();
 }

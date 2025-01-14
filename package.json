@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "node -e \"require('child_process').spawn(process.platform === 'win32' ? 'start-server.bat' : './start-server.sh', [], {shell: true, stdio: 'inherit'})\"",
+    "build": "ng build --configuration=production",
+    "serve:deno": "deno run --allow-net --allow-read server/main.ts",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
