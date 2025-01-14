@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IProduct, IProductById } from '../../model/interface/product';
 import { ProductService } from '../../services/product.service';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,7 +14,7 @@ export class ProductDetailComponent implements OnInit {
 
   product: IProduct | null = null;
   loading: boolean = true;
-  api_url: string = environment.CORS_URL + environment.API_URL;
+  api_url: string = 'api/v1/';
 
   constructor(private route: ActivatedRoute, private productService: ProductService) {}
 
@@ -31,7 +30,7 @@ export class ProductDetailComponent implements OnInit {
   loadProduct(productId: number) {
     this.loading = true;
     this.productService.getProductById(this.api_url, productId)
-    .then((product: any) => {
+    .then((product: IProductById | unknown) => {
       this.product = product as IProduct | null;
       this.loading = false;
     })

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/product.service';
 import { IProduct } from '../../model/interface/product';
@@ -17,7 +16,7 @@ export class ProductsComponent implements OnInit {
   constructor(private router: Router, private productService: ProductService) {}
 
   productList: IProduct[] = [];
-  api_url: string = environment.CORS_URL + environment.API_URL;
+  api_url: string = '/api/v1/';
   loading: boolean = true;
 
   // Life cycle method for the NG
