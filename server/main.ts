@@ -5,8 +5,8 @@ import { join } from 'https://deno.land/std@0.224.0/path/mod.ts';
 const ANGULAR_DIST_PATH = './dist/corner_store/browser';
 
 async function handler(req: Request): Promise<Response> {
-  const url = new URL(req.url);
-  let filepath = url.pathname;
+  const url: URL = new URL(req.url);
+  let filepath: string = url.pathname;
 
   // Serve a get route to fetch Product Data
   if (filepath === '/api/v1/GetAllProducts') {
@@ -49,7 +49,7 @@ async function handler(req: Request): Promise<Response> {
 
   // Serve product by ID from Angular fetch
   if (filepath === '/api/v1/GetProductById') {
-    const productId = url.searchParams.get('id');
+    const productId: string = url.searchParams.get('id') ?? '';
     if (!productId) {
       return new Response(JSON.stringify({
           error:'Product Id is required'
@@ -61,7 +61,7 @@ async function handler(req: Request): Promise<Response> {
       })
     }
     try {
-      const response = await fetch(
+      const response: Response = await fetch(
         `https://freeapi.miniprojectideas.com/api/amazon/GetProductById?id=${productId}`,
         {
           method: 'GET',
@@ -149,7 +149,7 @@ function getContentType(filepath: string): string {
 }
 
 // Start server
-const port = 4200;
+const port: number = 4200;
 console.log(`Server running on http://localhost:${port}`);
 try {
   Deno.listen({ port });
