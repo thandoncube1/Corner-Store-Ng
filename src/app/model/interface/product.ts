@@ -21,5 +21,5 @@ export interface IProductById {
 export interface IProducts {
     message: string;
     result: boolean;
-    data: Array<IProduct>;
+    data: IProduct[];
 }

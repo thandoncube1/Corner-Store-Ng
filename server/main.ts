@@ -151,17 +151,4 @@ function getContentType(filepath: string): string {
 // Start server
 const port: number = 4200;
 console.log(`Server running on http://localhost:${port}`);
-try {
-  Deno.listen({ port });
-  console.log(`Server listening on http://localhost:${port}`);
-} catch (err) {
-  if (err instanceof Deno.errors.AddrInUse) {
-    console.error(`Port ${port} is already in use`);
-    Deno.exit(1);
-  } else {
-    console.error(`Error starting server: ${err}`);
-    Deno.exit(1);
-  }
-} finally {
-  await serve(handler, { port });
-}
+await serve(handler, { port });
