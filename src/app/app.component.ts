@@ -13,4 +13,5 @@ import { NavigationComponent } from './shared/templates/navigation.component';
 })
 export class AppComponent {
   title = 'Corner Store';
+  isAuthenticated = false;
 }

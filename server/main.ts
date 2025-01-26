@@ -8,6 +8,33 @@ async function handler(req: Request): Promise<Response> {
   const url: URL = new URL(req.url);
   let filepath: string = url.pathname;
 
+  // User Registration & Login Routes
+  if (filepath === '/api/v1/Login') {
+    try {
+      const { username, password } = await req.json();
+      const response = await fetch('https://freeapi.miniprojectideas.com/api/amazon/Login', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          UserName: username,
+          UserPassword: password
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+      return new Response(JSON.stringify(data), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // Serve a get route to fetch Product Data
   if (filepath === '/api/v1/GetAllProducts') {
     try {

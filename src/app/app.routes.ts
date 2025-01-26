@@ -4,23 +4,23 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { UsersComponent } from './components/users/users.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'products',
-        pathMatch: 'full'
-    },
+  {
+    path: '',
+    redirectTo: 'products',
+    pathMatch: 'full',
+  },
 
-    {
-        path: 'products',
-        component: ProductsComponent,
-    },
-    {
-        path: 'products/:id',
-        component: ProductDetailComponent
-    },
-    // Creating Login Routes
-    {
-        path: 'users/login',
-        component: UsersComponent
-    }
+  {
+    path: 'products',
+    component: ProductsComponent,
+  },
+  {
+    path: 'products/:id',
+    component: ProductDetailComponent,
+  },
+  // Creating Login Routes
+  {
+    path: 'users/login',
+    component: UsersComponent,
+  },
 ];
