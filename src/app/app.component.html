@@ -1,7 +1,7 @@
 
 <!-- Navigation Setion -->
-<app-navigation [title]="title" [isAuthenticated]="isAuthenticated"></app-navigation>
+<app-navigation *ngIf="showNavigation" [title]="title" [isAuthenticated]="isAuthenticated"></app-navigation>
 
 <router-outlet />
 <!-- Adding a footer template -->
-<app-footer [title]="title"></app-footer>
+<app-footer *ngIf="showFooter" [title]="title"></app-footer>
