@@ -30,6 +30,8 @@ export class AppComponent implements OnInit {
       this.showNavigation = this.featureVisibility.shouldShowFeature(route, 'navigation');
       this.showFooter = this.featureVisibility.shouldShowFeature(route, 'footer');
     });
+
+    console.log(this.showFooter, this.showNavigation);
   }
 
   // Optional method used to render
