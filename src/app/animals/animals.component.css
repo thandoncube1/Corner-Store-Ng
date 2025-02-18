@@ -1,0 +1,14 @@
+h1 { text-align: center; }
+ul {
+    text-align: center;
+    margin: 20px 0;
+    & li > a {
+        font-size: 1.5em;
+        line-height: 1.5em;
+    }
+}
+
+.active {
+    font-weight: 600;
+    color: rgb(0, 169, 112);
+}

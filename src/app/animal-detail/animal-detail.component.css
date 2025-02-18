@@ -1,0 +1,14 @@
+/* Details Page for the Animals */
+.animal-details {
+    width: 800px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    padding: 20px;
+    & h4, p {
+        padding: 5px 0 5px;
+        line-height: 1.5em;
+    }
+    &> img {
+        width: 100%;
+    }
+}
